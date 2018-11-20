@@ -95,28 +95,28 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="enemigo2.png" />
-    <Content Include="btnReturn.png">
+    <Resource Include="Imagenes\enemigo2.png" />
+    <Content Include="Imagenes\btnReturn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="eneMet.png">
+    <Content Include="Imagenes\eneMet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="FondoInicio.jpg">
+    <Content Include="Imagenes\FondoInicio.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="spaceb.jpg" />
+    <Resource Include="Imagenes\spaceb.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="boton tamaño normal.png">
+    <Content Include="Imagenes\boton tamaño normal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="enemigo1.png">
+    <Content Include="Imagenes\enemigo1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="met.png">
+    <Content Include="Imagenes\met.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -126,17 +126,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="btnNext.png">
+    <Content Include="Imagenes\btnNext.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="btnStart.png">
+    <Content Include="Imagenes\btnStart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="imgteclas.png">
+    <Content Include="Imagenes\imgteclas.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
