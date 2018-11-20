@@ -35,5 +35,17 @@ namespace Semestral
             canvasReglas.Visibility = Visibility.Collapsed;
             canvasEnemigos.Visibility = Visibility.Visible;
         }
+
+        private void btnNextEnemigos_Click(object sender, RoutedEventArgs e)
+        {
+            canvasEnemigos.Visibility = Visibility.Collapsed;
+            canvasGamePlay.Visibility = Visibility.Visible;
+        }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            canvasEnemigos.Visibility = Visibility.Collapsed;
+            canvasReglas.Visibility = Visibility.Visible;
+        }
     }
 }
