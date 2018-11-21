@@ -95,7 +95,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Imagenes\enemigo2.png" />
+    <Content Include="Imagenes\enemigo2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Imagenes\btnReturn.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
