@@ -121,6 +121,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Imagenes\nave.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Properties\btnNext.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
