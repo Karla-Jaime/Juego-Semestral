@@ -11,7 +11,7 @@
         <Canvas x:Name="canvasPlay" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" Width="785" Visibility="Visible">
             <Image  Source="Imagenes/FondoInicio.jpg" Stretch="UniformToFill" Height="420" Width="795"/>
             <Button Click="btnStart_Click" x:Name="btnStart" Width="216" Height="55" Canvas.Left="298" 
-                    Canvas.Top="293" BorderBrush="{x:Null}" Background= "{x:Null}">
+                    Canvas.Top="293" BorderBrush="{x:Null}" Background= "{x:Null}" Foreground="{x:Null}">
                 <Image Source="Imagenes/btnStart.png" Height="50" Width="216" Stretch="Uniform"></Image>
             </Button>
             <Label Content="1 PLAYER" Canvas.Left="342" Canvas.Top="250" FontSize="24" Foreground="White" FontFamily="OCR A Extended" Height="35" Width="125"/>
@@ -46,16 +46,22 @@
             </Button>
 
         </Canvas>
-        <Canvas x:Name="canvasGamePlay" Height="419" Canvas.Top="1" Width="790" Visibility="Collapsed" KeyDown="canvasGamePlay_KeyDown" KeyUp="canvasGamePlay_KeyUp">
+        <Canvas x:Name="canvasGamePlay" Height="419" Canvas.Top="1" Width="790" Visibility="Collapsed" KeyDown="canvasGamePlay_KeyDown" KeyUp="canvasGamePlay_KeyUp" Focusable="True">
             <Image Source="Imagenes/spaceb.jpg" Height="430" Width="795" Canvas.Top="-6" Stretch="UniformToFill" Canvas.Left="-2"/>
-            <Image Source="Imagenes/enemigo1.png" Canvas.Left="640" Canvas.Top="44" Height="100" Width="100" RenderTransformOrigin="0.5,0.345"></Image>
-            <Image Source="Imagenes/enemigo2.png" Canvas.Left="580" Canvas.Top="269" Height="110" Width="110"></Image>
-            <Image Source="Imagenes/eneMet.png" Canvas.Left="420" Canvas.Top="122"></Image>
-            <Image Source="Imagenes/nave.png" Height="123" Canvas.Top="151" Width="95" Canvas.Left="35" RenderTransformOrigin="0.862,0"></Image>
+            <Image x:Name="imgEnemUno" Source="Imagenes/enemigo1.png" Canvas.Left="640" Canvas.Top="44" Height="100" Width="100" RenderTransformOrigin="0.5,0.345"></Image>
+            <Image x:Name="imgEnemDos" Source="Imagenes/enemigo2.png" Canvas.Left="580" Canvas.Top="269" Height="110" Width="110"></Image>
+            <Image x:Name="imgMeteorito" Source="Imagenes/eneMet.png" Canvas.Left="420" Canvas.Top="122"></Image>
+            <Image x:Name="imgNave" Source="Imagenes/nave.png" Height="123" Canvas.Top="151" Width="95" Canvas.Left="35" RenderTransformOrigin="0.862,0"></Image>
             <Label Content="SCORE:&#xD;&#xA;" Canvas.Left="10" Canvas.Top="9" Height="35" Width="100" FontSize="22" Foreground="White" FontFamily="OCR A Extended"/>
-            <TextBlock Canvas.Left="97" TextWrapping="Wrap" Text="000000" Canvas.Top="14" FontSize="22" Foreground="#FF00FF17" FontFamily="OCR A Extended" Height="25" Width="58"/>
+            <TextBlock x:Name="lblScore" Canvas.Left="97" TextWrapping="Wrap" Text="000000" Canvas.Top="14" FontSize="22" Foreground="#FF00FF17" FontFamily="OCR A Extended" Height="25" Width="58"/>
+            <TextBlock x:Name="lblinterseccionX" Canvas.Left="20" TextWrapping="Wrap" Text="--------" Canvas.Top="368" Foreground="White" FontSize="16"/>
+            <TextBlock x:Name="lblcolision" Canvas.Left="20" TextWrapping="Wrap" Text="--------" Canvas.Top="347" Foreground="White" FontSize="16"/>
+            <TextBlock x:Name="lblinterseccionY" Canvas.Left="20" TextWrapping="Wrap" Text="--------" Canvas.Top="390" Foreground="White" FontSize="16"/>
+        </Canvas>
+        <Canvas x:Name="canvasGameOver" Height="420" Width="795" Background="Black" Visibility="Collapsed">
 
         </Canvas>
+        
 
 
         <!--Aqui termina el canvas pricipal-->
