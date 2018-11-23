@@ -34,7 +34,7 @@ namespace Semestral
 
         //double velocidadEnem1 = 100;
         //double velocidadEnem2 = 80;
-        double velocidadMeteorito = 80;
+        double velocidadMeteorito = 50;
 
         public MainWindow()
         {
@@ -143,11 +143,11 @@ namespace Semestral
 
                             if (xNave + imgNave.Width >= xMeteorito && xNave <= xMeteorito + imgMeteorito.Width)
                             {
-                            lblinterseccionX.Text = "SI HAY INTERSECCION EN X!!!";
+                               lblinterseccionX.Text = "SI HAY INTERSECCION EN X!!!";
                             }
                             else
                             {
-                            lblinterseccionX.Text = "No hay interseccion en X";
+                               lblinterseccionX.Text = "No hay interseccion en X";
                             }
                         //Intersección en Y
                         double yMeteorito = Canvas.GetTop(imgMeteorito);
@@ -166,10 +166,10 @@ namespace Semestral
                             yNave + imgNave.Height >= yMeteorito && yNave <= yMeteorito + imgMeteorito.Height
                             )
                             {
-                               // lblcolision.Text = "HAY COLISIÓN!!";
+                                lblcolision.Text = "HAY COLISIÓN!!";
                                 this.estadoActual = EstadoJuego.GameOver;
-                            canvasGamePlay.Visibility = Visibility.Collapsed;
-                            canvasGameOver.Visibility = Visibility.Visible;
+                                canvasGamePlay.Visibility = Visibility.Collapsed;
+                                canvasGameOver.Visibility = Visibility.Visible;
                             }
                             else
                             {
