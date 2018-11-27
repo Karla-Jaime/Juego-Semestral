@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enemigos.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -126,6 +127,7 @@
     <Content Include="Imagenes\nave.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="nave.png" />
     <Content Include="Properties\btnNext.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

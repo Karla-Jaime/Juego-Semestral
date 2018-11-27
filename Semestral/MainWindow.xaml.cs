@@ -27,6 +27,8 @@ namespace Semestral
         Stopwatch stopwatch; //Toma el tiempo de ejecución del programa
         TimeSpan tiempoAnterior; //Timespan guarda rangos de tiempo
 
+        List<Enemigos> enemigos = new List<Enemigos>();
+        int puntos = 0;
         enum EstadoJuego { GamePlay, GameOver, GameStart };
         EstadoJuego estadoActual = EstadoJuego.GameStart;
         enum Direccion { Arriba, Abajo, Derecha, Izquierda, Ninguna };  //Para aclarar la direccion del jugador
@@ -34,7 +36,7 @@ namespace Semestral
 
         //double velocidadEnem1 = 100;
         //double velocidadEnem2 = 80;
-        double velocidadMeteorito = 50;
+        double velocidadNave = 100;
 
         public MainWindow()
         {
@@ -44,6 +46,10 @@ namespace Semestral
             stopwatch = new Stopwatch();
             stopwatch.Start();
             tiempoAnterior = stopwatch.Elapsed;
+
+            enemigos.Add(new Enemigos(imgMeteorito));
+            enemigos.Add(new Enemigos(imgEnemUno));
+            enemigos.Add(new Enemigos(imgEnemDos));
 
             ThreadStart threadStart = new ThreadStart(actualizar);
             //2..Inicializar el Thread - Dar valores e instrucciones
@@ -88,14 +94,14 @@ namespace Semestral
                     double topNaveActual = Canvas.GetTop(imgNave);
                     //Primero el elemento a mover, Luego los valores a mover
                     
-                    if (bottomNaveActual - (velocidadMeteorito * deltaTime.TotalSeconds) >= 0)
+                    if (bottomNaveActual - (velocidadNave * deltaTime.TotalSeconds) >= 0)
                     {
-                        Canvas.SetTop(imgNave, topNaveActual - (velocidadMeteorito * deltaTime.TotalSeconds));
+                        Canvas.SetTop(imgNave, topNaveActual - (velocidadNave * deltaTime.TotalSeconds));
                     }
                     break;
                 case Direccion.Abajo:
                    
-                    double nuevaPosicion1 = bottomNaveActual + (velocidadMeteorito * deltaTime.TotalSeconds);
+                    double nuevaPosicion1 = bottomNaveActual + (velocidadNave * deltaTime.TotalSeconds);
                     if (nuevaPosicion1 + imgNave.Width <= 440)
                     {
 
@@ -106,13 +112,13 @@ namespace Semestral
                     break;
                 case Direccion.Izquierda: //Para que no salga por la izquierda
 
-                    if (LeftNaveActual - (velocidadMeteorito * deltaTime.TotalSeconds) >= 0)
+                    if (LeftNaveActual - (velocidadNave * deltaTime.TotalSeconds) >= 0)
                     {
-                        Canvas.SetLeft(imgNave, LeftNaveActual - (velocidadMeteorito * deltaTime.TotalSeconds));
+                        Canvas.SetLeft(imgNave, LeftNaveActual - (velocidadNave * deltaTime.TotalSeconds));
                     }
                     break;
                 case Direccion.Derecha:
-                    double nuevaPosicion = LeftNaveActual + (velocidadMeteorito * deltaTime.TotalSeconds);
+                    double nuevaPosicion = LeftNaveActual + (velocidadNave * deltaTime.TotalSeconds);
                     if (nuevaPosicion + imgNave.Width <= 800)
                     {
 
@@ -138,66 +144,72 @@ namespace Semestral
 
                     if (estadoActual == EstadoJuego.GamePlay)
                         {
-                            double leftMeteoritoActual = Canvas.GetLeft(imgMeteorito);
-                        // se mueve 120 pixeles por segundo
-                        Canvas.SetLeft(imgMeteorito, leftMeteoritoActual - (velocidadMeteorito * deltaTime.TotalSeconds));
-                            if (Canvas.GetLeft(imgMeteorito) <= -100)
-                            {
-                            Canvas.SetLeft(imgMeteorito, 800);
-                            }
+                            
                         //moverjugador
                         //Se agrega al parametro utilizado 
                         moverjugador(deltaTime);
-                        //Intersección en X
-                        double xMeteorito = Canvas.GetLeft(imgMeteorito);
-                        double xNave = Canvas.GetLeft(imgNave);
+                        movimientoEnemigos(deltaTime);
+                         //Intersección en X
+                         foreach (Enemigos enemigos in enemigos)
+                         {
+                             double xTurtle = Canvas.GetLeft(imgNave);
+                             double xPopotes = Canvas.GetLeft(enemigos.Imagen);
+                             double yTurtle = Canvas.GetTop(imgNave);
+                             double yPopotes = Canvas.GetTop(enemigos.Imagen);
 
-                            if (xNave + imgNave.Width >= xMeteorito && xNave <= xMeteorito + imgMeteorito.Width)
-                            {
-                               lblinterseccionX.Text = "SI HAY INTERSECCION EN X!!!";
-                            }
-                            else
-                            {
-                               lblinterseccionX.Text = "No hay interseccion en X";
-                            }
-                        //Intersección en Y
-                        double yMeteorito = Canvas.GetTop(imgMeteorito);
-                        double yNave = Canvas.GetTop(imgNave);
-
-                            if (yNave + imgNave.Height >= yMeteorito && yNave <= yMeteorito + imgMeteorito.Height)
-                            {
-                            lblinterseccionY.Text = "SI HAY INTERSECCION EN Y!!!";
-                               
-                            }
-                            else
-                            {
-                            lblinterseccionY.Text = "No hay interseccion en Y";
-                            }
-                            if (xNave + imgNave.Width >= xMeteorito && xNave <= xMeteorito + imgMeteorito.Width &&
-                            yNave + imgNave.Height >= yMeteorito && yNave <= yMeteorito + imgMeteorito.Height
-                            )
-                            {
-                                lblcolision.Text = "HAY COLISIÓN!!";
-                                this.estadoActual = EstadoJuego.GameOver;
-                                canvasGamePlay.Visibility = Visibility.Collapsed;
-                                canvasGameOver.Visibility = Visibility.Visible;
-                            }
-                            else
-                            {
-                            lblcolision.Text = "No hay colisión";
-                            }
-                        }
-                        else if (this.estadoActual == EstadoJuego.GameOver)
-                        {
-
-                        }
-                    tiempoAnterior = tiempoActuali;
-                    }
-                    );
+                             if (xPopotes + enemigos.Imagen.Width >= xTurtle && xPopotes <= xTurtle + imgNave.Width &&
+                                 yPopotes + enemigos.Imagen.Height >= yTurtle && yPopotes <= yTurtle + imgNave.Height)
+                             {
+                                 estadoActual = EstadoJuego.GameOver;
+                                 canvasGamePlay.Visibility = Visibility.Collapsed;
+                                 canvasGameOver.Visibility = Visibility.Visible;
+                             }
+                         }
+                         }
+                         tiempoAnterior = tiempoActuali;
+                     }
+                );
             }
         }
 
-    
+        void movimientoEnemigos(TimeSpan deltaTime)
+        {
+            double leftMeteoritoActual = Canvas.GetLeft(imgMeteorito);
+            // se mueve 120 pixeles por segundo
+            Canvas.SetLeft(imgMeteorito, leftMeteoritoActual - (120 * deltaTime.TotalSeconds));
+            if (Canvas.GetLeft(imgMeteorito) <= -100)
+            {
+                Canvas.SetLeft(imgMeteorito, 800);
+            }
+
+            double leftEnem1Actual = Canvas.GetLeft(imgEnemUno);
+            // se mueve 120 pixeles por segundo
+            Canvas.SetLeft(imgEnemUno, leftEnem1Actual - (120 * deltaTime.TotalSeconds));
+            if (Canvas.GetLeft(imgEnemUno) <= -100)
+            {
+                Canvas.SetLeft(imgMeteorito, 800);
+            }
+            double leftEnem2Actual = Canvas.GetLeft(imgMeteorito);
+            // se mueve 120 pixeles por segundo
+            Canvas.SetLeft(imgEnemDos, leftEnem2Actual - (120 * deltaTime.TotalSeconds));
+            if (Canvas.GetLeft(imgEnemDos) <= -100)
+            {
+                Canvas.SetLeft(imgEnemDos, 800);
+            }
+
+
+            foreach (Enemigos popote in enemigos)
+            {
+                if (Canvas.GetLeft(popote.Imagen) <= 170 && Canvas.GetLeft(popote.Imagen) >= 169.99)
+                {
+                    puntos = puntos + 100;
+                    lblScore.Text = puntos.ToString();
+                }
+
+            }
+
+        }
+
         private void canvasGamePlay_KeyDown(object sender, KeyEventArgs e)
         {
             if (estadoActual == EstadoJuego.GamePlay)
