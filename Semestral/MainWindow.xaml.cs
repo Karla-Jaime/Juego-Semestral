@@ -221,7 +221,7 @@ namespace Semestral
                     puntos = puntos + 200;
                     lblScore.Text = puntos.ToString();
                 }
-
+            
             }
 
         }
