@@ -33,9 +33,7 @@ namespace Semestral
         EstadoJuego estadoActual = EstadoJuego.GameStart;
         enum Direccion { Arriba, Abajo, Derecha, Izquierda, Ninguna };  //Para aclarar la direccion del jugador
         Direccion direccionJugador = Direccion.Ninguna; //Inicializar
-
-        //double velocidadEnem1 = 100;
-        //double velocidadEnem2 = 80;
+        
         double velocidadNave = 100;
 
         public MainWindow()
@@ -139,8 +137,8 @@ namespace Semestral
                 {
                         var tiempoActuali = stopwatch.Elapsed;
                         var deltaTime = tiempoActuali - tiempoAnterior;
-                    //Para ir acelerando la velocidad del movimiento de la rana
-                    //velocidadRana += 2 * deltaTime.TotalSeconds; 
+                    
+                   
 
                     if (estadoActual == EstadoJuego.GamePlay)
                         {
@@ -149,16 +147,16 @@ namespace Semestral
                         //Se agrega al parametro utilizado 
                         moverjugador(deltaTime);
                         movimientoEnemigos(deltaTime);
-                         //Intersección en X
+                         //Intersecciones :(
                          foreach (Enemigos enemigos in enemigos)
                          {
-                             double xTurtle = Canvas.GetLeft(imgNave);
-                             double xPopotes = Canvas.GetLeft(enemigos.Imagen);
-                             double yTurtle = Canvas.GetTop(imgNave);
-                             double yPopotes = Canvas.GetTop(enemigos.Imagen);
+                             double xNave = Canvas.GetLeft(imgNave);
+                            double yNave = Canvas.GetTop(imgNave);
+                            double xEnemigos = Canvas.GetLeft(enemigos.Imagen);
+                             
+                             double yEnemigos = Canvas.GetTop(enemigos.Imagen);
 
-                             if (xPopotes + enemigos.Imagen.Width >= xTurtle && xPopotes <= xTurtle + imgNave.Width &&
-                                 yPopotes + enemigos.Imagen.Height >= yTurtle && yPopotes <= yTurtle + imgNave.Height)
+                             if (xEnemigos + enemigos.Imagen.Width >= xNave && xEnemigos <= xNave + imgNave.Width && yEnemigos + enemigos.Imagen.Height >= yNave && yEnemigos <= yNave + imgNave.Height)
                              {
                                  estadoActual = EstadoJuego.GameOver;
                                  canvasGamePlay.Visibility = Visibility.Collapsed;
@@ -174,35 +172,53 @@ namespace Semestral
 
         void movimientoEnemigos(TimeSpan deltaTime)
         {
+            double velocidadMet = 100;
+            double velocidadNave1 = 100;
+            double velocidadNave2 = 100;
+
+            velocidadMet += 2 * deltaTime.TotalSeconds;
+            velocidadNave1 += .8 * deltaTime.TotalSeconds;
+            velocidadNave2 += .6 * deltaTime.TotalSeconds;
             double leftMeteoritoActual = Canvas.GetLeft(imgMeteorito);
-            // se mueve 120 pixeles por segundo
-            Canvas.SetLeft(imgMeteorito, leftMeteoritoActual - (120 * deltaTime.TotalSeconds));
-            if (Canvas.GetLeft(imgMeteorito) <= -100)
+            
+
+            Canvas.SetLeft(imgMeteorito, leftMeteoritoActual - (velocidadMet * deltaTime.TotalSeconds));
+            if (Canvas.GetLeft(imgMeteorito) <= -200)
             {
                 Canvas.SetLeft(imgMeteorito, 800);
             }
 
             double leftEnem1Actual = Canvas.GetLeft(imgEnemUno);
             // se mueve 120 pixeles por segundo
-            Canvas.SetLeft(imgEnemUno, leftEnem1Actual - (120 * deltaTime.TotalSeconds));
-            if (Canvas.GetLeft(imgEnemUno) <= -100)
+            Canvas.SetLeft(imgEnemUno, leftEnem1Actual - (velocidadNave1 * deltaTime.TotalSeconds));
+            if (Canvas.GetLeft(imgEnemUno) <= -200)
             {
                 Canvas.SetLeft(imgMeteorito, 800);
             }
             double leftEnem2Actual = Canvas.GetLeft(imgMeteorito);
             // se mueve 120 pixeles por segundo
-            Canvas.SetLeft(imgEnemDos, leftEnem2Actual - (120 * deltaTime.TotalSeconds));
+            Canvas.SetLeft(imgEnemDos, leftEnem2Actual - (velocidadNave2 * deltaTime.TotalSeconds));
             if (Canvas.GetLeft(imgEnemDos) <= -100)
             {
                 Canvas.SetLeft(imgEnemDos, 800);
             }
 
 
-            foreach (Enemigos popote in enemigos)
+            foreach (Enemigos enem in enemigos)
             {
-                if (Canvas.GetLeft(popote.Imagen) <= 170 && Canvas.GetLeft(popote.Imagen) >= 169.99)
+                if (Canvas.GetLeft((imgEnemUno)) <= 170 && Canvas.GetLeft(imgEnemUno) >= 169.99)
                 {
                     puntos = puntos + 100;
+                    lblScore.Text = puntos.ToString();
+                }
+                if (Canvas.GetLeft((imgEnemDos)) <= 170 && Canvas.GetLeft(imgEnemDos) >= 170)
+                {
+                    puntos = puntos + 150;
+                    lblScore.Text = puntos.ToString();
+                }
+                if (Canvas.GetLeft((imgMeteorito)) <= 170 && Canvas.GetLeft(imgMeteorito) >= 169.99)
+                {
+                    puntos = puntos + 200;
                     lblScore.Text = puntos.ToString();
                 }
 
