@@ -15,7 +15,7 @@
                 <Image Source="Imagenes/btnStart.png" Height="50" Width="216" Stretch="Uniform"></Image>
             </Button>
             <Label Content="1 PLAYER" Canvas.Left="342" Canvas.Top="250" FontSize="24" Foreground="White" FontFamily="OCR A Extended" Height="35" Width="125"/>
-
+            <Image Source="Imagenes/Logo.png" Height="280" Width="375" Canvas.Left="220" Canvas.Top="-15"/>
 
         </Canvas>
         <!--Aqui empiezan las reglas del juego-->
@@ -34,6 +34,7 @@
             <Button x:Name="btnNextEnemigos"  Canvas.Left="565" Canvas.Top="330" Width="185" Background="{x:Null}" BorderBrush="{x:Null}" Height="75" Click="btnNextEnemigos_Click">
                 <Image Source="Imagenes/btnNext.png"></Image>
             </Button>
+
             <Image Source="Imagenes/met.png" Canvas.Left="44" Canvas.Top="95" Height="115" Width="110" ></Image>
             <Label Content="Esquiva los meteoritos. No dejes que&#xD;&#xA;te toquen o pierdes el juego al instante. "
                    Canvas.Left="157" Canvas.Top="120" Foreground="White" FontFamily="OCR A Extended" FontSize="24"/>

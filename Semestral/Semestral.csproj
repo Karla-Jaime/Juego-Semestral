@@ -127,7 +127,10 @@
     <Content Include="Imagenes\nave.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="nave.png" />
+    <Content Include="nave.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="logo.png" />
     <Content Include="Properties\btnNext.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
