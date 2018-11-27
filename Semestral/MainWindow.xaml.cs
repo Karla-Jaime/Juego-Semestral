@@ -81,16 +81,27 @@ namespace Semestral
         void moverjugador(TimeSpan deltaTime)
         {
             double LeftNaveActual = Canvas.GetLeft(imgNave);
+            double bottomNaveActual = Canvas.GetTop(imgNave);
             switch (direccionJugador)
             {
                 case Direccion.Arriba:
                     double topNaveActual = Canvas.GetTop(imgNave);
                     //Primero el elemento a mover, Luego los valores a mover
-                    Canvas.SetTop(imgNave, topNaveActual - (velocidadMeteorito * deltaTime.TotalSeconds));
+                    
+                    if (bottomNaveActual - (velocidadMeteorito * deltaTime.TotalSeconds) >= 0)
+                    {
+                        Canvas.SetTop(imgNave, topNaveActual - (velocidadMeteorito * deltaTime.TotalSeconds));
+                    }
                     break;
                 case Direccion.Abajo:
-                    double bottomNaveActual = Canvas.GetTop(imgNave);
-                    Canvas.SetTop(imgNave, bottomNaveActual + (velocidadMeteorito * deltaTime.TotalSeconds));
+                   
+                    double nuevaPosicion1 = bottomNaveActual + (velocidadMeteorito * deltaTime.TotalSeconds);
+                    if (nuevaPosicion1 + imgNave.Width <= 440)
+                    {
+
+                        Canvas.SetTop(imgNave, nuevaPosicion1);
+                    }
+                  
 
                     break;
                 case Direccion.Izquierda: //Para que no salga por la izquierda
@@ -125,11 +136,11 @@ namespace Semestral
                     //Para ir acelerando la velocidad del movimiento de la rana
                     //velocidadRana += 2 * deltaTime.TotalSeconds; 
 
-                    if (this.estadoActual == EstadoJuego.GamePlay)
+                    if (estadoActual == EstadoJuego.GamePlay)
                         {
                             double leftMeteoritoActual = Canvas.GetLeft(imgMeteorito);
                         // se mueve 120 pixeles por segundo
-                        Canvas.SetLeft(imgMeteorito, leftMeteoritoActual - (120 * deltaTime.TotalSeconds));
+                        Canvas.SetLeft(imgMeteorito, leftMeteoritoActual - (velocidadMeteorito * deltaTime.TotalSeconds));
                             if (Canvas.GetLeft(imgMeteorito) <= -100)
                             {
                             Canvas.SetLeft(imgMeteorito, 800);
